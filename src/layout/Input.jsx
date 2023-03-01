@@ -9,9 +9,10 @@ function Input({
     id,
     disabled,
     placeholder,
+    className,
 }) {
     return (
-        <div className="input-base">
+        <div className={"input-base " + className}>
             <label htmlFor={name}>{text}</label>
             <input
                 type={type}
