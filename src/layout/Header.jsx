@@ -16,7 +16,7 @@ function Header() {
                         <Link to="/produtos">Produtos</Link>
                     </li>
                     <li>
-                        <Link to="/tipos">Tipos de Produto</Link>
+                        <Link to="/tipos">Cadastro de Tipo de Produto</Link>
                     </li>
                     <li>
                         <Link to="/relatorio">Relatório</Link>

@@ -9,7 +9,7 @@ function Form({ title, children, handleSubmit, className }) {
                 handleSubmit();
             }}
         >
-            <h1 className="titulo-produtos">{title}</h1>
+            {title != undefined && <h1 className="titulo-produtos">{title}</h1>}
             {children}
             <button type="submit">Enviar</button>
         </form>

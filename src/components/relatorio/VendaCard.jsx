@@ -3,7 +3,17 @@ import moment from "moment";
 import ItemVendaCard from "../relatorio/ItemVendaCard";
 import "moment/locale/pt-br";
 
+import impostoImagem from "../../img/imposto.png";
+
 function VendaCard({ venda }) {
+    const impostoTotal = venda.itens.reduce(
+        (accum, item) =>
+            accum +
+            Number(item.total) *
+                (Number(item.produto.tipo.percentual_imposto) / 100),
+        0
+    );
+
     const itensMap = () => {
         return venda.itens.map((item, index) => {
             return <ItemVendaCard item={item} />;
@@ -19,6 +29,10 @@ function VendaCard({ venda }) {
             </p>
             <h4 className="itens-titulo">Itens</h4>
             {itensMap()}
+            <div className="imposto-item">
+                <img src={impostoImagem} alt="Impostos" />
+                <span>R$ {impostoTotal.toFixed(2)}</span>
+            </div>
         </div>
     );
 }

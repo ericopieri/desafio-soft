@@ -5,7 +5,7 @@ function ProjectCard({ produto }) {
         <div className="product-card">
             <h3>{produto.nome}</h3>
             <p className="preco-produto">
-                Preço: <span>R$ {Number(produto.valor).toFixed(2)}</span>
+                Preço: <span>R$ {produto.valor}</span>
             </p>
             <p className="tipo-produto">{produto.tipo.nome}</p>
         </div>

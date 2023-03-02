@@ -3,10 +3,12 @@ import ProductCard from "../components/ProductCard";
 import FormCadastro from "../layout/FormCadastro";
 import Input from "../layout/Input";
 import Select from "../layout/Select";
+import Loading from "../layout/Loading";
 import axios from "axios";
 
 function Produtos() {
     const [showForm, setShowForm] = useState(false);
+    const [showLoading, setShowLoading] = useState(false);
 
     const [produtos, setProdutos] = useState([]);
     const [newProduto, setNewProduto] = useState({});
@@ -48,10 +50,16 @@ function Produtos() {
 
     useEffect(() => console.log(newProduto), [newProduto]);
 
+    const produtosMap = () =>
+        produtos.map((produto) => <ProductCard produto={produto} />);
+
     useEffect(() => {
         const getProdutos = async () => {
+            setShowLoading(true);
+
             const { data } = await axios.get("http://localhost/produtos.php");
 
+            setShowLoading(false);
             setProdutos(data);
         };
 
@@ -75,9 +83,13 @@ function Produtos() {
                     Confira os produtos que estão disponíveis em nossa Loja
                 </p>
                 <section className="container-produtos">
-                    {produtos.map((produto) => (
-                        <ProductCard produto={produto} />
-                    ))}
+                    {produtos.length > 0 ? (
+                        produtosMap()
+                    ) : showLoading ? (
+                        <Loading />
+                    ) : (
+                        <p>Não há itens Cadastrados!</p>
+                    )}
                 </section>
                 {showForm && (
                     <FormCadastro
@@ -89,9 +101,9 @@ function Produtos() {
                             handleChange={changeInput}
                             text="Nome"
                             type="text"
+                            className="cadastro-input"
                             placeholder="Nome do Produto"
                             name="nome"
-                            className="cadastro-input"
                             value={newProduto.nome || null}
                         />
                         <Input
@@ -101,7 +113,6 @@ function Produtos() {
                             type="number"
                             placeholder="Valor unitário"
                             name="valor"
-                            className="cadastro-input"
                         />
                         <Select
                             handleChange={changeSelect}

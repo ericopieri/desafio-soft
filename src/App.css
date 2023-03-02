@@ -141,6 +141,10 @@ a {
     height: 55px;
 }
 
+.input-base + .input-base {
+    margin-top: 15px;
+}
+
 .input-base input,
 .input-base select {
     flex: 1;
@@ -398,7 +402,7 @@ tfoot tr {
 }
 
 .item-venda-card h4 {
-    color: #00bfff;
+    color: #008ebd;
 }
 
 .item-venda-card h4 span {
@@ -406,19 +410,73 @@ tfoot tr {
     color: rgba(0, 0, 0, 0.569);
 }
 
-.preco-item-venda {
-    margin: 10px 0;
-}
-
 .preco-item-venda,
-.total-item-venda {
+.total-item-venda,
+.imposto-item-venda {
+    margin-top: 8px;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.569);
     width: 100%;
 }
 
 .preco-item-venda span,
-.total-item-venda span {
+.total-item-venda span,
+.imposto-item-venda span {
     font-style: italic;
     color: green;
+}
+
+/* Loading */
+
+.loading-div img {
+    height: 100%;
+}
+
+.loading-div {
+    width: 100vw;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+}
+.imposto-item {
+    margin-top: 10px;
+    height: 30px;
+    align-items: center;
+    display: flex;
+    color: red;
+    font-weight: bold;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.imposto-item img {
+    height: 100%;
+    margin-right: 5px;
+}
+
+/* Tipo Produto */
+
+.titulo-large {
+    width: 700px;
+    font-size: 1.5em;
+}
+.tipo-form {
+    margin-top: 25px;
+}
+
+.tipos-produtos {
+    padding: 25px;
+}
+
+.show-tipos {
+    padding: 65px 10px;
+    font-size: 1.075em;
+    background: #0057d8;
+    border: none;
+    color: white;
+    margin-top: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
