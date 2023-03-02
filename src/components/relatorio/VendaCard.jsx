@@ -14,7 +14,7 @@ function VendaCard({ venda }) {
         <div className="venda-card">
             <p className="data-venda">
                 {moment(venda.data).format("DD [de] MMMM [de] YYYY") +
-                    " ás " +
+                    " às " +
                     moment(venda.data).format("HH:mm [horas]")}
             </p>
             <h4 className="itens-titulo">Itens</h4>
