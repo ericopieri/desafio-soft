@@ -19,8 +19,12 @@ function Produtos() {
             newProdutoParams.append("valor", newProduto.valor);
             newProdutoParams.append("tipo", newProduto.tipo);
 
-            const { data } = await axios.post("http://locahost/", newProduto);
-            setProdutos([...produtos, data]);
+            const { data } = await axios.post(
+                "http://localhost/produtoPost.php",
+                newProdutoParams
+            );
+
+            setProdutos(data);
             setNewProduto({});
             setShowForm(false);
         } catch (error) {
@@ -36,23 +40,24 @@ function Produtos() {
     };
 
     const changeSelect = (codigo) => {
-        console.log(codigo);
+        setNewProduto((newProduto) => ({
+            ...newProduto,
+            tipo: codigo,
+        }));
     };
 
     useEffect(() => console.log(newProduto), [newProduto]);
 
     useEffect(() => {
         const getProdutos = async () => {
-            const { data } = await axios.get(
-                "http://localhost/Desafio/produtos.php"
-            );
+            const { data } = await axios.get("http://localhost/produtos.php");
 
             setProdutos(data);
         };
 
         const getTipos = async () => {
             const { data } = await axios.get(
-                "http://localhost/Desafio/produtoPost.php"
+                "http://localhost/tipoProduto.php"
             );
 
             setTipos(data);

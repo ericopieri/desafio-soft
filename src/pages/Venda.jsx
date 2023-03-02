@@ -34,10 +34,7 @@ function Venda() {
                 venda.append("total", totalComImpostos);
                 venda.append("itens", JSON.stringify(itens));
 
-                await axios.post(
-                    "http://localhost/Desafio/vendaPost.php",
-                    venda
-                );
+                await axios.post("http://localhost/vendaPost.php", venda);
 
                 setItens([]);
                 setTotalImpostos(0);
@@ -53,9 +50,7 @@ function Venda() {
 
     useEffect(() => {
         const getProducts = async () => {
-            const { data } = await axios.get(
-                "http://localhost/Desafio/produtos.php"
-            );
+            const { data } = await axios.get("http://localhost/produtos.php");
 
             setProducts(data);
         };

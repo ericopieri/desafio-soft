@@ -269,6 +269,7 @@ tfoot tr {
     margin-top: 20px;
     width: 100%;
     gap: 25px;
+    flex-wrap: wrap;
 }
 
 .product-card {
@@ -341,4 +342,83 @@ tfoot tr {
     font-size: 1.3em;
     border: 1px solid #00bfff;
     color: #00bfff;
+}
+
+/* Relatório */
+
+.relatorio-vendas {
+    padding: 25px;
+}
+
+.relatorio-vendas-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    width: 550px;
+}
+
+.venda-card {
+    width: 100%;
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: #00bfff 0px 1px 4px, #00bfff90 0px 0px 0px 3px;
+    /* box-shadow: #00bfffb4 5px 5px, #00bfff88 10px 10px, #00bfff64 15px 15px,
+        #00bfff3b 20px 20px, #00bfff16 25px 25px; */
+}
+
+.venda-card + .venda-card {
+    margin-top: 35px;
+}
+
+.data-venda {
+    font-style: italic;
+    font-size: 0.95em;
+    color: rgba(0, 0, 0, 0.53);
+    font-weight: 700;
+}
+
+.itens-titulo {
+    padding: 5px 35px 5px 5px;
+    border-left: 10px solid #00bfff;
+    background: #ccf1ff;
+    display: inline-block;
+    margin: 15px 0 22px 0;
+}
+
+.item-venda-card {
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+        rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    border-radius: 3px;
+    max-width: 50%;
+}
+
+.item-venda-card + .item-venda-card {
+    margin-top: 15px;
+}
+
+.item-venda-card h4 {
+    color: #00bfff;
+}
+
+.item-venda-card h4 span {
+    font-size: 0.96em;
+    color: rgba(0, 0, 0, 0.569);
+}
+
+.preco-item-venda {
+    margin: 10px 0;
+}
+
+.preco-item-venda,
+.total-item-venda {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.569);
+    width: 100%;
+}
+
+.preco-item-venda span,
+.total-item-venda span {
+    font-style: italic;
+    color: green;
 }
