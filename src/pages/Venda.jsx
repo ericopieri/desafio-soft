@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import IncluirProdutos from "../components/venda/IncluirProdutos";
 import ConcluirVenda from "../components/venda/ConcluirVenda";
@@ -11,8 +11,7 @@ function Venda() {
 
     const atualizarImpostos = () => {
         const newTotalImpostos = itens.reduce((accum, item) => {
-            const percentual =
-                Number(item.produto.tipo.percentual_imposto) / 100;
+            const percentual = item.produto.tipo.percentual_imposto / 100;
 
             return Number((accum + item.total * percentual).toFixed(2));
         }, 0);
@@ -34,12 +33,17 @@ function Venda() {
                 venda.append("total", totalComImpostos);
                 venda.append("itens", JSON.stringify(itens));
 
-                await axios.post("http://localhost/vendaPost.php", venda);
+                const { data } = await axios.post(
+                    "http://localhost/venda",
+                    venda
+                );
 
                 setItens([]);
                 setTotalImpostos(0);
+
+                return data;
             } catch (err) {
-                console.error(err);
+                return err;
             }
         }
     };
@@ -50,9 +54,8 @@ function Venda() {
 
     useEffect(() => {
         const getProducts = async () => {
-            const { data } = await axios.get("http://localhost/produtos.php");
-
-            setProducts(data);
+            const { data } = await axios.get("http://localhost/produto");
+            setProducts(data.data);
         };
 
         getProducts();

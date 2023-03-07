@@ -30,7 +30,7 @@ function IncluirProdutos({ products, handleIncluir, imposto }) {
     };
 
     const handleSelect = (codigo) => {
-        const product = products.find((product) => product.codigo === codigo);
+        const product = products.find((product) => product.codigo == codigo);
 
         setNewItem((newItem) => ({
             ...newItem,
@@ -61,6 +61,7 @@ function IncluirProdutos({ products, handleIncluir, imposto }) {
             <div className="group-inputs">
                 <Input
                     type="number"
+                    className="input-clean"
                     name="quantidade"
                     handleChange={handleChangeInput}
                     placeholder="Qtd do produto"

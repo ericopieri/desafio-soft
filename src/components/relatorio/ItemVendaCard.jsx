@@ -1,10 +1,12 @@
 import React from "react";
 
 function ItemVendaCard({ item }) {
+    console.log(item);
+
     const imposto =
-        Number(item.quantidade) *
-        Number(item.produto.valor) *
-        (Number(item.produto.tipo.percentual_imposto) / 100);
+        item.quantidade *
+        item.produto.valor *
+        (item.produto.tipo.percentual_imposto / 100);
 
     return (
         <div className="item-venda-card">
@@ -16,10 +18,10 @@ function ItemVendaCard({ item }) {
             </h4>
             <p className="preco-item-venda">
                 Valor un.:{"  "}
-                <span>R$ {item.produto.valor}</span>
+                <span>R$ {item.produto.valor.toFixed(2)}</span>
             </p>
             <div className="total-item-venda">
-                Total: <span>R$ {item.total}</span>
+                Total: <span>R$ {item.total.toFixed(2)}</span>
             </div>
             <div className="imposto-item-venda">
                 Imposto: <span>R$ {imposto.toFixed(2)}</span>

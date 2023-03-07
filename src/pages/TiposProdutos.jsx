@@ -1,30 +1,23 @@
 import React, { useState, useEffect } from "react";
-import FormCadastro from "../layout/FormCadastro";
-import Input from "../layout/Input";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import Divider from "../layout/Divider";
 import axios from "axios";
+import ListarTipos from "../components/tiposProduto/ListarTipos";
+import IncluirTipo from "../components/tiposProduto/IncluirTipo";
 
 function TiposProdutos() {
-    const [newTipo, setNewTipo] = useState({});
-    const [tiposOpen, setTiposOpen] = useState(false);
     const [tipos, setTipos] = useState([]);
-    const [showTipos, setShowTipos] = useState(false);
 
-    const handleInput = (event) => {
-        setNewTipo((newTipo) => ({
-            ...newTipo,
-            [event.target.name]: event.target.value,
-        }));
-    };
+    const postNewTipo = async (newTipo) => {
+        let newTipoParams = new URLSearchParams();
+        newTipoParams.append("nome", newTipo.nome);
+        newTipoParams.append("percentual_imposto", newTipo.percentual_imposto);
 
-    const tiposMap = () => {
-        return tipos.map((tipo) => (
-            <div className="tipo-visu" key={tipo.id}>
-                <h3>
-                    {tipo.nome} - {tipo.percentual_imposto}%
-                </h3>
-            </div>
-        ));
+        const { data: tiposAtualizados } = await axios.post(
+            "http://localhost/tipoProdutoPost.php",
+            newTipoParams
+        );
+
+        setTipos(tiposAtualizados);
     };
 
     useEffect(() => {
@@ -37,45 +30,14 @@ function TiposProdutos() {
         };
 
         getTipos();
-    });
+    }, []);
 
     return (
         <div className="conteudo-principal">
             <div className="tipos-produtos">
-                <h1 className="titulo-produtos titulo-large">
-                    Cadastro de um novo Tipo de Produto
-                </h1>
-                <FormCadastro className="tipo-form">
-                    <Input
-                        type="text"
-                        text="Nome"
-                        name="nome"
-                        placeholder="Nome que indentifica o Tipo"
-                        value={newTipo.nome ?? ""}
-                        handleChange={handleInput}
-                    />
-                    <Input
-                        type="number"
-                        text="% Imposto"
-                        name="percentual_imposto"
-                        placeholder="Nome que indentifica o Tipo"
-                        value={newTipo.percentual_imposto ?? ""}
-                        handleChange={handleInput}
-                    />
-                </FormCadastro>
-                <div className="container-tipos">
-                    <button
-                        className="show-tipos"
-                        onClick={() => setShowTipos((showTipos) => !showTipos)}
-                    >
-                        {showTipos ? (
-                            <AiOutlineArrowRight className="up" />
-                        ) : (
-                            <AiOutlineArrowRight className="down" />
-                        )}
-                    </button>
-                    {showTipos && tiposMap()}
-                </div>
+                <IncluirTipo postNewTipo={postNewTipo} />
+                <Divider className="vertical" />
+                <ListarTipos tipos={tipos} />
             </div>
         </div>
     );

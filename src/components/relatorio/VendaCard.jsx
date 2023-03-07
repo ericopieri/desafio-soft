@@ -8,9 +8,7 @@ import impostoImagem from "../../img/imposto.png";
 function VendaCard({ venda }) {
     const impostoTotal = venda.itens.reduce(
         (accum, item) =>
-            accum +
-            Number(item.total) *
-                (Number(item.produto.tipo.percentual_imposto) / 100),
+            accum + item.total * (item.produto.tipo.percentual_imposto / 100),
         0
     );
 

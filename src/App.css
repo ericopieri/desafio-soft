@@ -46,10 +46,15 @@ a {
 }
 
 .menu ul li a {
+    color: white;
     padding: 5px 8px;
     transition: 0.3s;
     font-size: 1.1em;
     border-radius: 5px;
+}
+
+.tipo-message {
+    margin-top: 15px;
 }
 
 .menu ul li a:hover {
@@ -59,7 +64,8 @@ a {
 
 /* Home */
 
-.conteudo-principal {
+.conteudo-principal,
+.tipos-produtos {
     min-height: calc(100vh - 160px);
 }
 
@@ -131,6 +137,10 @@ a {
 }
 
 .footer {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 80px;
     background: #00bfff;
 }
@@ -179,7 +189,12 @@ a {
     gap: 15px;
 }
 
+.group-inputs .input-base {
+    margin: 0;
+}
+
 .button-pr {
+    cursor: pointer;
     width: 100%;
     height: 50px;
     font-size: 1.075em;
@@ -285,7 +300,8 @@ tfoot tr {
     border-radius: 2px;
 }
 
-.product-card h3 {
+.product-card h3,
+.tipos-visu h3 {
     padding: 5px 0 5px 15px;
     text-align: center;
     background: #e1f7ff;
@@ -433,7 +449,8 @@ tfoot tr {
 }
 
 .loading-div {
-    width: 100vw;
+    margin: 15px 0;
+    width: 100%;
     height: 60px;
     display: flex;
     justify-content: center;
@@ -461,22 +478,67 @@ tfoot tr {
     font-size: 1.5em;
 }
 .tipo-form {
+    width: 100%;
     margin-top: 25px;
 }
 
 .tipos-produtos {
     padding: 25px;
+    display: flex;
+    gap: 25px;
 }
 
-.show-tipos {
-    padding: 65px 10px;
+.tipos-button-div button {
+    width: 100%;
     font-size: 1.075em;
+    padding: 12px 0;
     background: #0057d8;
     border: none;
     color: white;
-    margin-top: 20px;
     border-radius: 5px;
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.tipos-produtos-container {
+    display: flex;
+}
+
+.vertical {
+    width: 1px;
+    background: #cccccc;
+    display: block;
+}
+
+.tipos {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+}
+
+.tipos-container {
+    display: flex;
+    margin-bottom: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    overflow-y: scroll;
+}
+
+.tipos-visu {
+    border: 1px solid #008ebd;
+    border-radius: 3px;
+    width: 100%;
+    padding: 15px;
+}
+
+.tipos-visu + .tipos-visu {
+    margin-top: 15px;
+}
+
+.centralizado-imposto {
+    width: 100%;
     justify-content: center;
 }

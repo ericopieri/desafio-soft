@@ -3,6 +3,7 @@ import ProductCard from "../components/ProductCard";
 import FormCadastro from "../layout/FormCadastro";
 import Input from "../layout/Input";
 import Select from "../layout/Select";
+import Message from "../layout/Message";
 import Loading from "../layout/Loading";
 import axios from "axios";
 
@@ -11,31 +12,46 @@ function Produtos() {
     const [showLoading, setShowLoading] = useState(false);
 
     const [produtos, setProdutos] = useState([]);
+    const [message, setMessage] = useState([""]);
+    const [type, setType] = useState([""]);
     const [newProduto, setNewProduto] = useState({});
     const [tipos, setTipos] = useState([]);
 
     const postNewProduto = async () => {
         try {
-            const newProdutoParams = new URLSearchParams();
-            newProdutoParams.append("nome", newProduto.nome);
-            newProdutoParams.append("valor", newProduto.valor);
-            newProdutoParams.append("tipo", newProduto.tipo);
+            if (
+                newProduto.nome &&
+                newProduto.valor !== undefined &&
+                newProduto.tipo
+            ) {
+                const newProdutoParams = new URLSearchParams();
+                newProdutoParams.append("nome", newProduto.nome);
+                newProdutoParams.append("valor", newProduto.valor);
+                newProdutoParams.append("tipo", newProduto.tipo);
 
-            const { data } = await axios.post(
-                "http://localhost/produtoPost.php",
-                newProdutoParams
-            );
+                const { data } = await axios.post(
+                    "http://localhost/produto",
+                    newProdutoParams
+                );
 
-            setProdutos(data);
-            setNewProduto({});
-            setShowForm(false);
+                setMessage(data.message ?? "");
+                setType(data.status);
+
+                getProdutos();
+                setNewProduto({});
+                setShowForm(false);
+            } else {
+                setMessage("Ainda faltam informações a serem preenchidas!");
+                setType("error");
+            }
         } catch (error) {
-            console.log(error);
+            setMessage(error.response.data.message ?? "");
+            setType(error.response.data.status ?? "");
         }
     };
 
     const changeInput = (event) => {
-        setNewProduto((produto) => ({
+        setNewProduto((newProduto) => ({
             ...newProduto,
             [event.target.name]: event.target.value,
         }));
@@ -44,33 +60,29 @@ function Produtos() {
     const changeSelect = (codigo) => {
         setNewProduto((newProduto) => ({
             ...newProduto,
-            tipo: codigo,
+            tipo: Number(codigo),
         }));
     };
-
-    useEffect(() => console.log(newProduto), [newProduto]);
 
     const produtosMap = () =>
         produtos.map((produto) => <ProductCard produto={produto} />);
 
+    const getProdutos = async () => {
+        setShowLoading(true);
+
+        const { data } = await axios.get("http://localhost/produto");
+
+        setShowLoading(false);
+        setProdutos(data.data);
+    };
+
+    const getTipos = async () => {
+        const { data } = await axios.get("http://localhost/tipo");
+
+        setTipos(data.data);
+    };
+
     useEffect(() => {
-        const getProdutos = async () => {
-            setShowLoading(true);
-
-            const { data } = await axios.get("http://localhost/produtos.php");
-
-            setShowLoading(false);
-            setProdutos(data);
-        };
-
-        const getTipos = async () => {
-            const { data } = await axios.get(
-                "http://localhost/tipoProduto.php"
-            );
-
-            setTipos(data);
-        };
-
         getProdutos();
         getTipos();
     }, []);
@@ -82,6 +94,13 @@ function Produtos() {
                 <p className="aproveite">
                     Confira os produtos que estão disponíveis em nossa Loja
                 </p>
+                {message.length > 0 && (
+                    <Message
+                        text={message}
+                        handleTimeOut={setMessage}
+                        type={type}
+                    />
+                )}
                 <section className="container-produtos">
                     {produtos.length > 0 ? (
                         produtosMap()
@@ -116,6 +135,7 @@ function Produtos() {
                         />
                         <Select
                             handleChange={changeSelect}
+                            value={newProduto.tipo ?? ""}
                             text="Tipo"
                             options={tipos}
                             placeholder="Tipo do Produto"

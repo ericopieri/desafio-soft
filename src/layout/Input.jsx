@@ -18,6 +18,7 @@ function Input({
                 type={type}
                 name={name}
                 placeholder={placeholder}
+                required
                 id={id}
                 value={value ?? ""}
                 onChange={handleChange}

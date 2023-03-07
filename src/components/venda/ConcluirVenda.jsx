@@ -9,10 +9,10 @@ function ConcluirVenda({ itens, persistirVenda, imposto }) {
     const [type, setType] = useState("");
 
     const fluxoPersistir = async () => {
-        await persistirVenda();
+        const response = await persistirVenda();
 
-        setMessage("Venda cadastrada com Sucesso!");
-        setType("success");
+        setMessage(response.message);
+        setType(response.status);
     };
 
     const itensMap = () => {
@@ -39,7 +39,11 @@ function ConcluirVenda({ itens, persistirVenda, imposto }) {
                     </tr>
                 )}
             </Tabela>
-            <ButtonPrimary text="Concluir Venda" handleClick={fluxoPersistir} />
+            <ButtonPrimary
+                text="Concluir Venda"
+                handleClick={fluxoPersistir}
+                disabled={itens.length}
+            />
         </div>
     );
 }
