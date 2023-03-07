@@ -8,27 +8,34 @@ function TiposProdutos() {
     const [tipos, setTipos] = useState([]);
 
     const postNewTipo = async (newTipo) => {
-        let newTipoParams = new URLSearchParams();
-        newTipoParams.append("nome", newTipo.nome);
-        newTipoParams.append("percentual_imposto", newTipo.percentual_imposto);
+        if (newTipo.nome && newTipo.percentual_imposto != undefined) {
+            try {
+                let newTipoParams = new URLSearchParams();
+                newTipoParams.append("nome", newTipo.nome);
+                newTipoParams.append(
+                    "percentual_imposto",
+                    newTipo.percentual_imposto
+                );
 
-        const { data: tiposAtualizados } = await axios.post(
-            "http://localhost/tipoProdutoPost.php",
-            newTipoParams
-        );
+                const { data } = await axios.post(
+                    "http://localhost/tipo",
+                    newTipoParams
+                );
 
-        setTipos(tiposAtualizados);
+                return data;
+            } catch (error) {
+                return error.response.data;
+            }
+        }
+    };
+
+    const getTipos = async () => {
+        const { data } = await axios.get("http://localhost/tipo");
+
+        setTipos(data.data);
     };
 
     useEffect(() => {
-        const getTipos = async () => {
-            const { data } = await axios.get(
-                "http://localhost/tipoProduto.php"
-            );
-
-            setTipos(data);
-        };
-
         getTipos();
     }, []);
 

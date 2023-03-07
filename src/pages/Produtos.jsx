@@ -18,12 +18,12 @@ function Produtos() {
     const [tipos, setTipos] = useState([]);
 
     const postNewProduto = async () => {
-        try {
-            if (
-                newProduto.nome &&
-                newProduto.valor !== undefined &&
-                newProduto.tipo
-            ) {
+        if (
+            newProduto.nome &&
+            newProduto.valor !== undefined &&
+            newProduto.tipo
+        ) {
+            try {
                 const newProdutoParams = new URLSearchParams();
                 newProdutoParams.append("nome", newProduto.nome);
                 newProdutoParams.append("valor", newProduto.valor);
@@ -40,13 +40,13 @@ function Produtos() {
                 getProdutos();
                 setNewProduto({});
                 setShowForm(false);
-            } else {
-                setMessage("Ainda faltam informações a serem preenchidas!");
-                setType("error");
+            } catch (error) {
+                setMessage(error.response.data.message ?? "");
+                setType(error.response.data.status ?? "");
             }
-        } catch (error) {
-            setMessage(error.response.data.message ?? "");
-            setType(error.response.data.status ?? "");
+        } else {
+            setMessage("Ainda faltam informações a serem preenchidas!");
+            setType("error");
         }
     };
 

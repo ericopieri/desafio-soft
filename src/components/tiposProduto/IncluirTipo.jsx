@@ -5,18 +5,19 @@ import Message from "../../layout/Message";
 
 function IncluirTipo({ postNewTipo }) {
     const [newTipo, setNewTipo] = useState({});
-    const [messageVisible, setMessageVisible] = useState(false);
     const [message, setMessage] = useState("");
     const [type, setType] = useState("");
 
     const verificarPost = async () => {
         if (newTipo.nome && newTipo.percentual_imposto) {
-            await postNewTipo(newTipo);
+            const data = await postNewTipo(newTipo);
 
-            setNewTipo({});
-            setMessageVisible(true);
-            setMessage("Tipo de Produto cadastrado com Sucesso!");
-            setType("success");
+            if (data.status === "success") {
+                setNewTipo({});
+            }
+
+            setMessage(data.message ?? "");
+            setType(data.status ?? "");
         }
     };
 
@@ -32,12 +33,12 @@ function IncluirTipo({ postNewTipo }) {
             <h1 className="titulo-produtos titulo-large">
                 Cadastro de um novo Tipo de Produto
             </h1>
-            {messageVisible && (
+            {message.length > 0 && (
                 <Message
                     text={message}
                     type={type}
                     className="tipo-message"
-                    handleTimeOut={setMessageVisible}
+                    handleTimeOut={setMessage}
                 />
             )}
             <FormCadastro

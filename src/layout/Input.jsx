@@ -16,6 +16,7 @@ function Input({
             <label htmlFor={name}>{text}</label>
             <input
                 type={type}
+                min={type === "number" ? 1 : ""}
                 name={name}
                 placeholder={placeholder}
                 required
