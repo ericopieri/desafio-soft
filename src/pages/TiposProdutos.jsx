@@ -7,8 +7,28 @@ import IncluirTipo from "../components/tiposProduto/IncluirTipo";
 function TiposProdutos() {
     const [tipos, setTipos] = useState([]);
 
+    const checkSpecialChar = (char = "") => {
+        const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+        return specialChars.test(char);
+    };
+
     const postNewTipo = async (newTipo) => {
-        if (newTipo.nome && newTipo.percentual_imposto != undefined) {
+        if (newTipo.nome && newTipo.percentual_imposto !== undefined) {
+            if (checkSpecialChar(newTipo.nome)) {
+                return {
+                    status: "error",
+                    message: "Nome com caracteres especiais!",
+                };
+            }
+
+            if (newTipo.percentual_imposto < 0) {
+                return {
+                    status: "error",
+                    message: "Imposto negativo não existe!",
+                };
+            }
+
             try {
                 let newTipoParams = new URLSearchParams();
                 newTipoParams.append("nome", newTipo.nome);
@@ -22,6 +42,7 @@ function TiposProdutos() {
                     newTipoParams
                 );
 
+                getTipos();
                 return data;
             } catch (error) {
                 return error.response.data;

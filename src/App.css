@@ -276,6 +276,31 @@ tfoot tr {
     padding: 25px;
 }
 
+.product-actions {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 12px;
+    margin-left: auto;
+}
+
+.product-actions button:hover {
+    background: white;
+    color: #008ebd;
+}
+
+.product-actions button {
+    transition: 0.3s;
+    border: 1px solid #00bfff;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 8px;
+    color: white;
+    background-color: #008ebd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .titulo-produtos {
     width: 500px;
     padding: 5px 0 5px 15px;
@@ -287,11 +312,13 @@ tfoot tr {
     display: flex;
     margin-top: 20px;
     width: 100%;
-    gap: 25px;
+    gap: 45px;
     flex-wrap: wrap;
 }
 
 .product-card {
+    border: 1px solid #00bfff50;
+    position: relative;
     max-width: 300px;
     min-width: 300px;
     padding: 20px;
@@ -415,6 +442,12 @@ tfoot tr {
 
 .item-venda-card + .item-venda-card {
     margin-top: 15px;
+}
+
+.exclude:hover {
+    background: #ff0000;
+    color: white;
+    cursor: pointer;
 }
 
 .item-venda-card h4 {

@@ -17,12 +17,30 @@ function Produtos() {
     const [newProduto, setNewProduto] = useState({});
     const [tipos, setTipos] = useState([]);
 
+    const checkSpecialChar = (char = "") => {
+        const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+        return specialChars.test(char);
+    };
+
     const postNewProduto = async () => {
         if (
             newProduto.nome &&
             newProduto.valor !== undefined &&
             newProduto.tipo
         ) {
+            if (newProduto.valor < 0) {
+                setMessage("Valor negativo não suportado!");
+                setType("error");
+                return null;
+            }
+
+            if (checkSpecialChar(newProduto.nome)) {
+                setMessage("Nome com caracteres especiais!");
+                setType("error");
+                return null;
+            }
+
             try {
                 const newProdutoParams = new URLSearchParams();
                 newProdutoParams.append("nome", newProduto.nome);

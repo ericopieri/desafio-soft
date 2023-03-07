@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import IncluirProdutos from "../components/venda/IncluirProdutos";
 import ConcluirVenda from "../components/venda/ConcluirVenda";
@@ -8,6 +9,15 @@ function Venda() {
     const [products, setProducts] = useState([]);
     const [itens, setItens] = useState([]);
     const [totalImpostos, setTotalImpostos] = useState(0.0);
+
+    const removeItem = (id) => {
+        const item = itens.find((item) => item.id === id);
+        console.log(itens.indexOf(item));
+
+        setItens((oldItens) => oldItens.splice(itens.indexOf(item), 1));
+    };
+
+    useEffect(() => console.log(itens), [itens]);
 
     const atualizarImpostos = () => {
         const newTotalImpostos = itens.reduce((accum, item) => {
@@ -75,6 +85,7 @@ function Venda() {
                 itens={itens}
                 persistirVenda={persistirVenda}
                 imposto={totalImpostos}
+                handleRemove={removeItem}
             />
         </div>
     );

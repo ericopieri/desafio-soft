@@ -10,13 +10,16 @@ function Input({
     disabled,
     placeholder,
     className,
+    pattern,
 }) {
     return (
         <div className={"input-base " + className}>
             <label htmlFor={name}>{text}</label>
             <input
                 type={type}
+                pattern={pattern}
                 min={type === "number" ? 1 : ""}
+                step="any"
                 name={name}
                 placeholder={placeholder}
                 required

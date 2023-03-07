@@ -4,7 +4,7 @@ function Select({ options, name, handleChange, text, placeholder, value }) {
     const optionsMap = () => {
         return options.map((option) => {
             return (
-                <option key={option.nome} value={option.codigo}>
+                <option key={option.codigo} value={option.codigo}>
                     {option.nome}
                 </option>
             );
@@ -23,7 +23,7 @@ function Select({ options, name, handleChange, text, placeholder, value }) {
                         event.target.options[event.target.selectedIndex];
                     handleChange(codigo);
                 }}
-                value={value ?? placeholder}
+                value={value || placeholder}
             >
                 <option value={placeholder} disabled>
                     {placeholder}

@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import Input from "../../layout/Input";
 import Select from "../../layout/Select.jsx";
+import Message from "../../layout/Message.jsx";
 import ButtonPrimary from "../../layout/ButtonPrimary";
 
 function IncluirProdutos({ products, handleIncluir, imposto }) {
+    const [message, setMessage] = useState("");
+    const [type, setType] = useState("");
+
     const [newItem, setNewItem] = useState({
         quantidade: 1,
     });
@@ -21,12 +26,32 @@ function IncluirProdutos({ products, handleIncluir, imposto }) {
     }, [newItem.produto, newItem.quantidade]);
 
     const verificarInfos = () => {
-        if (newItem.produto && newItem.quantidade) {
-            handleIncluir(newItem);
-            setNewItem({
-                quantidade: 1,
-            });
+        if (!newItem.produto && !newItem.quantidade) {
+            setMessage("Preencha todas as informações!");
+            setType("error");
+            return null;
         }
+
+        if (newItem.quantidade < 1) {
+            setNewItem((newItem) => ({
+                ...newItem,
+                quantidade: 1,
+            }));
+            setMessage("Quantidade abaixo de 1 não permitida!");
+            setType("error");
+            return null;
+        }
+
+        handleIncluir({
+            ...newItem,
+            id: uuidv4(),
+        });
+
+        setMessage("Novo item de compra Adicionado com sucesso!");
+        setType("success");
+        setNewItem({
+            quantidade: 1,
+        });
     };
 
     const handleSelect = (codigo) => {
@@ -50,6 +75,13 @@ function IncluirProdutos({ products, handleIncluir, imposto }) {
 
     return (
         <section className="half incluir">
+            {message.length > 0 && (
+                <Message
+                    text={message}
+                    handleTimeOut={setMessage}
+                    type={type}
+                />
+            )}
             <Select
                 text="Produto"
                 name="Produto"

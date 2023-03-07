@@ -1,8 +1,14 @@
 import React from "react";
 
-function LinhaTabela({ item }) {
+function LinhaTabela({ item, handleClick, excluding }) {
     return (
-        <tr>
+        <tr
+            onClick={() => {
+                console.log(item.id);
+                handleClick(item.id);
+            }}
+            className={excluding !== false ? "exclude" : ""}
+        >
             <td className="left-text">
                 {item.produto.codigo} - {item.produto.nome}
             </td>
