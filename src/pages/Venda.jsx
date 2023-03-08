@@ -73,17 +73,19 @@ function Venda() {
     }, [itens]);
 
     return (
-        <div className="conteudo-principal venda">
-            <IncluirProdutos
-                products={products}
-                handleIncluir={incluirProduto}
-            />
-            <ConcluirVenda
-                itens={itens}
-                persistirVenda={persistirVenda}
-                imposto={totalImpostos}
-                handleRemove={removeItem}
-            />
+        <div className="conteudo-principal">
+            <section className="venda">
+                <IncluirProdutos
+                    products={products}
+                    handleIncluir={incluirProduto}
+                />
+                <ConcluirVenda
+                    itens={itens}
+                    persistirVenda={persistirVenda}
+                    imposto={totalImpostos}
+                    handleRemove={removeItem}
+                />
+            </section>
         </div>
     );
 }
