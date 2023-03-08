@@ -231,6 +231,10 @@ tfoot tr {
     grid-template-columns: 28% 1fr;
 }
 
+.concluir-venda-actions + .message {
+    margin-top: 12px;
+}
+
 .concluir-venda-actions button {
     border-radius: 3px;
     padding: 5px 20px;
@@ -312,12 +316,12 @@ tfoot tr {
     margin-left: auto;
 }
 
-.product-actions button:hover {
+.product-actions a:hover {
     background: white;
     color: #008ebd;
 }
 
-.product-actions button {
+.product-actions a {
     transition: 0.3s;
     border: 1px solid #00bfff;
     cursor: pointer;
@@ -597,4 +601,17 @@ tfoot tr {
 .centralizado-imposto {
     width: 100%;
     justify-content: center;
+}
+
+/* Edição Produto */
+
+.edicao-produto {
+    padding: 25px;
+}
+
+.sem-produto-edicao {
+    font-size: 1.2em;
+    margin: 15px 0 0 0;
+    font-weight: bold;
+    color: red;
 }
