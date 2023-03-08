@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 
-function Message({ type, text, handleTimeOut, className }) {
+function Message({
+    type,
+    text,
+    handleTimeOut = () => console.log("3 segundos!"),
+    className,
+}) {
     useEffect(() => {
         setTimeout(() => handleTimeOut(""), 3000);
     }, []);
