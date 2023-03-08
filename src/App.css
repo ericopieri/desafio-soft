@@ -231,6 +231,23 @@ tfoot tr {
     grid-template-columns: 28% 1fr;
 }
 
+.concluir-venda-actions button {
+    border-radius: 3px;
+    padding: 5px 20px;
+    color: white;
+    background: #00bfff;
+    transition: 0.1s;
+    outline: none;
+    border: 1px solid #00bfff;
+    cursor: pointer;
+}
+
+.concluir-venda-actions button:hover {
+    background: #f5c6cb;
+    color: red;
+    border: 1px solid red;
+}
+
 .button-ex-item {
     padding: 3px 5px;
     cursor: pointer;

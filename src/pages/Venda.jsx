@@ -10,14 +10,11 @@ function Venda() {
     const [itens, setItens] = useState([]);
     const [totalImpostos, setTotalImpostos] = useState(0.0);
 
-    const removeItem = (id) => {
-        const item = itens.find((item) => item.id === id);
-        console.log(itens.indexOf(item));
+    const removeItem = (id = false) => {
+        const newItens = id ? itens.filter((item) => item.id !== id) : [];
 
-        setItens((oldItens) => oldItens.splice(itens.indexOf(item), 1));
+        setItens(newItens);
     };
-
-    useEffect(() => console.log(itens), [itens]);
 
     const atualizarImpostos = () => {
         const newTotalImpostos = itens.reduce((accum, item) => {
