@@ -26,10 +26,10 @@ function IncluirProdutos({ products, handleIncluir, imposto }) {
     }, [newItem.produto, newItem.quantidade]);
 
     const verificarInfos = () => {
-        if (!newItem.produto && !newItem.quantidade) {
+        if (!newItem.produto || !newItem.quantidade) {
             setMessage("Preencha todas as informações!");
             setType("error");
-            return null;
+            return;
         }
 
         if (newItem.quantidade < 1) {
@@ -39,7 +39,7 @@ function IncluirProdutos({ products, handleIncluir, imposto }) {
             }));
             setMessage("Quantidade abaixo de 1 não permitida!");
             setType("error");
-            return null;
+            return;
         }
 
         handleIncluir({
