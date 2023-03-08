@@ -1,8 +1,6 @@
 import React from "react";
 
 function ItemVendaCard({ item }) {
-    console.log(item);
-
     const imposto =
         item.quantidade *
         item.produto.valor *
