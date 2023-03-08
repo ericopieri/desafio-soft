@@ -242,7 +242,7 @@ tfoot tr {
     border: 1px solid red;
 }
 
-.button-ex-item #sem-itens {
+#sem-itens {
     grid-template-columns: 1fr;
 }
 
