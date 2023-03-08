@@ -1,16 +1,17 @@
 import React from "react";
 import { BsFillTrashFill, BsPencilFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 function ProjectCard({ produto }) {
     return (
         <div className="product-card">
             <div className="product-actions">
-                <button>
+                <Link>
                     <BsFillTrashFill />
-                </button>
-                <button>
+                </Link>
+                <Link to={"/produtos/editar/" + produto.codigo}>
                     <BsPencilFill />
-                </button>
+                </Link>
             </div>
             <h3>{produto.nome}</h3>
             <p className="preco-produto">
