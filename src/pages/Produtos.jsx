@@ -82,8 +82,26 @@ function Produtos() {
         }));
     };
 
+    const remove = async (codigo) => {
+        try {
+            const { data } = await axios.get(
+                "http://localhost/produto/" + codigo + "?action=delete"
+            );
+
+            await getProdutos();
+
+            setMessage(data.message);
+            setType(data.status);
+        } catch (err) {
+            setMessage(err.response.data.message);
+            setType(err.response.data.status);
+        }
+    };
+
     const produtosMap = () =>
-        produtos.map((produto) => <ProductCard produto={produto} />);
+        produtos.map((produto) => (
+            <ProductCard produto={produto} handleRemove={remove} />
+        ));
 
     const getProdutos = async () => {
         setShowLoading(true);
