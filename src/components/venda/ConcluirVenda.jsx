@@ -5,8 +5,6 @@ import ButtonPrimary from "../../layout/ButtonPrimary";
 import Message from "../../layout/Message";
 
 function ConcluirVenda({ itens, persistirVenda, imposto, handleRemove }) {
-    const [excluding, setExcluding] = useState(false);
-
     const [message, setMessage] = useState(false);
     const [type, setType] = useState("");
 
@@ -19,22 +17,13 @@ function ConcluirVenda({ itens, persistirVenda, imposto, handleRemove }) {
 
     const itensMap = () => {
         return itens.map((item) => {
-            return (
-                <LinhaTabela
-                    item={item}
-                    handleClick={handleRemove}
-                    excluding={excluding}
-                />
-            );
+            return <LinhaTabela item={item} handleClick={handleRemove} />;
         });
     };
 
     return (
         <div className="half concluir">
             <div className="concluir-venda-actions">
-                <button onClick={() => setExcluding((excluding) => !excluding)}>
-                    Excluir
-                </button>
                 <button>Limpar</button>
             </div>
             {message.length > 0 && (

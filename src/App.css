@@ -224,14 +224,25 @@ tr {
     padding: 8px 0;
     font-size: 1.075em;
     text-align: right;
-    grid-template-columns: 45% 1fr 1fr 1fr;
+    grid-template-columns: 28% 2fr 2fr 2fr 1fr;
 }
 
 tfoot tr {
-    grid-template-columns: 45% 55%;
+    grid-template-columns: 28% 1fr;
 }
 
-#sem-itens {
+.button-ex-item {
+    padding: 3px 5px;
+    cursor: pointer;
+    border: 1px solid #f5c6cb;
+    transition: 0.1s;
+}
+
+.button-ex-item:hover {
+    border: 1px solid red;
+}
+
+.button-ex-item #sem-itens {
     grid-template-columns: 1fr;
 }
 
@@ -258,7 +269,8 @@ tfoot tr {
     border: 1px solid transparent;
 }
 
-.error {
+.error,
+.button-ex-item {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
@@ -442,12 +454,6 @@ tfoot tr {
 
 .item-venda-card + .item-venda-card {
     margin-top: 15px;
-}
-
-.exclude:hover {
-    background: #ff0000;
-    color: white;
-    cursor: pointer;
 }
 
 .item-venda-card h4 {

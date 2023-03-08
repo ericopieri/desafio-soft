@@ -9,6 +9,7 @@ function Tabela({ children, className, imposto }) {
                     <th>Quantidade</th>
                     <th>Valor un.</th>
                     <th>Total</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody className="corpo-tabela">{children}</tbody>

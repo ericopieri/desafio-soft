@@ -15,6 +15,9 @@ function LinhaTabela({ item, handleClick, excluding }) {
             <td>{item.quantidade}</td>
             <td>R$ {item.produto.valor.toFixed(2)}</td>
             <td>R$ {item.total.toFixed(2)}</td>
+            <td>
+                <button className="button-ex-item">Excluir</button>
+            </td>
         </tr>
     );
 }
