@@ -38,7 +38,7 @@ function TiposProdutos() {
                 );
 
                 const { data } = await axios.post(
-                    "http://localhost/tipo",
+                    "http://localhost/tipo?action=get",
                     newTipoParams
                 );
 
@@ -51,7 +51,7 @@ function TiposProdutos() {
     };
 
     const getTipos = async () => {
-        const { data } = await axios.get("http://localhost/tipo");
+        const { data } = await axios.get("http://localhost/tipo?action=get");
 
         setTipos(data.data);
     };
@@ -62,11 +62,11 @@ function TiposProdutos() {
 
     return (
         <div className="conteudo-principal">
-            <div className="tipos-produtos">
+            <section className="tipos-produtos">
                 <IncluirTipo postNewTipo={postNewTipo} />
                 <Divider className="vertical" />
                 <ListarTipos tipos={tipos} />
-            </div>
+            </section>
         </div>
     );
 }

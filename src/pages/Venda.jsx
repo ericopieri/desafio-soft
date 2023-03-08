@@ -41,7 +41,7 @@ function Venda() {
                 venda.append("itens", JSON.stringify(itens));
 
                 const { data } = await axios.post(
-                    "http://localhost/venda",
+                    "http://localhost/venda?action=create",
                     venda
                 );
 
@@ -61,7 +61,9 @@ function Venda() {
 
     useEffect(() => {
         const getProducts = async () => {
-            const { data } = await axios.get("http://localhost/produto");
+            const { data } = await axios.get(
+                "http://localhost/produto?action=get"
+            );
             setProducts(data.data);
         };
 

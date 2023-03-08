@@ -48,7 +48,7 @@ function Produtos() {
                 newProdutoParams.append("tipo", newProduto.tipo);
 
                 const { data } = await axios.post(
-                    "http://localhost/produto",
+                    "http://localhost/produto?action=create",
                     newProdutoParams
                 );
 
@@ -88,14 +88,14 @@ function Produtos() {
     const getProdutos = async () => {
         setShowLoading(true);
 
-        const { data } = await axios.get("http://localhost/produto");
+        const { data } = await axios.get("http://localhost/produto?action=get");
 
         setShowLoading(false);
         setProdutos(data.data);
     };
 
     const getTipos = async () => {
-        const { data } = await axios.get("http://localhost/tipo");
+        const { data } = await axios.get("http://localhost/tipo?action=get");
 
         setTipos(data.data);
     };

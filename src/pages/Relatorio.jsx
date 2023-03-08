@@ -11,7 +11,9 @@ function Relatorio() {
         setShowLoading(true);
 
         const getVendas = async () => {
-            const { data } = await axios.get("http://localhost/venda");
+            const { data } = await axios.get(
+                "http://localhost/venda?action=get"
+            );
             setShowLoading(false);
             setVendas(data.data);
         };
