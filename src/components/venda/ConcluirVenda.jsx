@@ -17,14 +17,20 @@ function ConcluirVenda({ itens, persistirVenda, imposto, handleRemove }) {
 
     const itensMap = () => {
         return itens.map((item) => {
-            return <LinhaTabela item={item} handleClick={handleRemove} />;
+            return (
+                <LinhaTabela
+                    item={item}
+                    handleClickRemove={handleRemove}
+                    key={item.id}
+                />
+            );
         });
     };
 
     return (
         <div className="half concluir">
             <div className="concluir-venda-actions">
-                <button>Limpar</button>
+                <button onClick={() => handleRemove()}>Limpar</button>
             </div>
             {message.length > 0 && (
                 <Message
