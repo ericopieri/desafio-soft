@@ -17,7 +17,7 @@ function ProjectCard({ produto, handleRemove }) {
             <p className="preco-produto">
                 Preço: <span>R$ {produto.valor.toFixed(2)}</span>
             </p>
-            <p className="tipo-produto">{produto.tiponome}</p>
+            <p className="tipo-produto">{produto.tipo_nome}</p>
         </div>
     );
 }
