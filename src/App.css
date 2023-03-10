@@ -486,6 +486,23 @@ tfoot tr {
     color: rgba(0, 0, 0, 0.569);
 }
 
+.deletado {
+    background: #f5c6cb;
+    border: 1px solid red;
+}
+
+.deletado-p {
+    margin: 10px 0 0 0;
+    font-style: italic;
+    color: red;
+    font-size: 0.8em;
+}
+
+.deletado-p span {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
 .preco-item-venda,
 .total-item-venda,
 .imposto-item-venda {
