@@ -22,7 +22,9 @@ function Relatorio() {
     }, []);
 
     const vendasMap = () => {
-        return vendas.map((venda) => <VendaCard venda={venda} />);
+        return vendas.map((venda) => (
+            <VendaCard venda={venda} key={venda.codigo} />
+        ));
     };
 
     return (

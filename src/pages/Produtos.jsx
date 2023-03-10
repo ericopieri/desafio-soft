@@ -100,21 +100,30 @@ function Produtos() {
 
     const produtosMap = () =>
         produtos.map((produto) => (
-            <ProductCard produto={produto} handleRemove={remove} />
+            <ProductCard
+                produto={produto}
+                handleRemove={remove}
+                key={produto.codigo}
+            />
         ));
 
     const getProdutos = async () => {
         setShowLoading(true);
 
-        const { data } = await axios.get("http://localhost/produto?action=get");
-
-        setShowLoading(false);
-        setProdutos(data.data);
+        try {
+            const { data } = await axios.get(
+                "http://localhost/produto?action=get"
+            );
+            setProdutos(data.data);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setShowLoading(false);
+        }
     };
 
     const getTipos = async () => {
         const { data } = await axios.get("http://localhost/tipo?action=get");
-
         setTipos(data.data);
     };
 

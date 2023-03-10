@@ -10,7 +10,7 @@ function ListarTipos({ tipos }) {
         return (
             <div className="tipos-container">
                 {tipos.map((tipo) => (
-                    <div className="tipos-visu" key={tipo.id}>
+                    <div className="tipos-visu" key={tipo.codigo}>
                         <h3>{tipo.nome}</h3>
                         <div className="imposto-item centralizado-imposto">
                             <img src={impostoImagem} alt="Impostos" />

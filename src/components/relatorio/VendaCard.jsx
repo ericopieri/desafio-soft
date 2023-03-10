@@ -7,14 +7,13 @@ import impostoImagem from "../../img/imposto.png";
 
 function VendaCard({ venda }) {
     const impostoTotal = venda.itens.reduce(
-        (accum, item) =>
-            accum + item.total * (item.produto.tipo.percentual_imposto / 100),
+        (accum, item) => accum + item.total * (item.percentual_imposto / 100),
         0
     );
 
     const itensMap = () => {
         return venda.itens.map((item, index) => {
-            return <ItemVendaCard item={item} />;
+            return <ItemVendaCard item={item} key={item.codigo} />;
         });
     };
 
