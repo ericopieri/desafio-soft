@@ -7,6 +7,7 @@ import Produtos from "./pages/Produtos";
 import TiposProdutos from "./pages/TiposProdutos";
 import Relatorio from "./pages/Relatorio";
 import EdicaoProduto from "./pages/EdicaoProduto";
+import EdicaoTipo from "./pages/EdicaoTipo";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
                     path="/produtos/editar/:id"
                     element={<EdicaoProduto />}
                 />
+                <Route path="/tipos/editar/:id" element={<EdicaoTipo />} />
             </Routes>
             <Footer />
         </Router>
