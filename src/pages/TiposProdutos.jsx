@@ -4,7 +4,11 @@ import axios from "axios";
 import ListarTipos from "../components/tiposProduto/ListarTipos";
 import IncluirTipo from "../components/tiposProduto/IncluirTipo";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 function TiposProdutos() {
+    const mySwal = withReactContent(Swal);
     const [tipos, setTipos] = useState([]);
 
     const [showLoading, setShowLoading] = useState(false);
@@ -13,6 +17,42 @@ function TiposProdutos() {
         const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
         return specialChars.test(char);
+    };
+
+    const deleteTipo = (codigo) => {
+        mySwal
+            .fire({
+                title: "Tem certeza?",
+                text: "Deletador este Tipo de Produto, deletará também todos os produtos associados a ele!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#008000",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            })
+            .then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        await axios.get(
+                            "http://localhost/tipo/" + codigo + "?action=delete"
+                        );
+
+                        mySwal.fire(
+                            "Sucesso",
+                            "Tipo de Produto deletado!",
+                            "success"
+                        );
+
+                        getTipos();
+                    } catch (error) {
+                        mySwal.fire(
+                            "Erro",
+                            error.response.data.message,
+                            "error"
+                        );
+                    }
+                }
+            });
     };
 
     const postNewTipo = async (newTipo) => {
@@ -76,7 +116,11 @@ function TiposProdutos() {
             <section className="tipos-produtos">
                 <IncluirTipo postNewTipo={postNewTipo} />
                 <Divider className="vertical" />
-                <ListarTipos tipos={tipos} showLoading={showLoading} />
+                <ListarTipos
+                    tipos={tipos}
+                    showLoading={showLoading}
+                    deleteTipo={deleteTipo}
+                />
             </section>
         </div>
     );

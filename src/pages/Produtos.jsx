@@ -7,9 +7,14 @@ import Message from "../layout/Message";
 import Loading from "../layout/Loading";
 import axios from "axios";
 
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
 function Produtos() {
     const [showForm, setShowForm] = useState(false);
     const [showLoading, setShowLoading] = useState(false);
+
+    const mySwal = withReactContent(Swal);
 
     const [produtos, setProdutos] = useState([]);
     const [message, setMessage] = useState([""]);
@@ -83,19 +88,34 @@ function Produtos() {
     };
 
     const remove = async (codigo) => {
-        try {
-            const { data } = await axios.get(
-                "http://localhost/produto/" + codigo + "?action=delete"
-            );
+        mySwal
+            .fire({
+                title: "Tem certeza?",
+                text: "Deletador este Tipo de Produto, deletará também todos os produtos associados a ele!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#008000",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            })
+            .then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        await axios.get(
+                            "http://localhost/produto/" +
+                                codigo +
+                                "?action=delete"
+                        );
 
-            await getProdutos();
+                        mySwal.fire("Sucesso", "Produto deletado!", "success");
 
-            setMessage(data.message);
-            setType(data.status);
-        } catch (err) {
-            setMessage(err.response.data.message);
-            setType(err.response.data.status);
-        }
+                        await getProdutos();
+                    } catch (err) {
+                        setMessage(err.response.data.message);
+                        setType(err.response.data.status);
+                    }
+                }
+            });
     };
 
     const produtosMap = () =>
@@ -123,8 +143,15 @@ function Produtos() {
     };
 
     const getTipos = async () => {
-        const { data } = await axios.get("http://localhost/tipo?action=get");
-        setTipos(data.data);
+        try {
+            const { data } = await axios.get(
+                "http://localhost/tipo?action=get"
+            );
+
+            setTipos(data.data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     useEffect(() => {
@@ -139,7 +166,7 @@ function Produtos() {
                 <p className="aproveite">
                     Confira os produtos que estão disponíveis em nossa Loja
                 </p>
-                {message.length > 0 && (
+                {message && (
                     <Message
                         text={message}
                         handleTimeOut={setMessage}

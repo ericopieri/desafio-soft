@@ -5,7 +5,7 @@ import { BsFillTrashFill, BsPencilFill } from "react-icons/bs";
 import Loading from "../../layout/Loading";
 import impostoImagem from "../../img/imposto.png";
 
-function ListarTipos({ tipos, showLoading }) {
+function ListarTipos({ tipos, showLoading, deleteTipo }) {
     const [showTipos, setShowTipos] = useState(false);
 
     const tiposMap = () => {
@@ -14,7 +14,7 @@ function ListarTipos({ tipos, showLoading }) {
                 {tipos.map((tipo) => (
                     <div className="tipos-visu" key={tipo.codigo}>
                         <div className="product-actions">
-                            <Link>
+                            <Link onClick={() => deleteTipo(tipo.codigo)}>
                                 <BsFillTrashFill />
                             </Link>
                             <Link to={"/tipos/editar/" + tipo.codigo}>
