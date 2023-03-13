@@ -29,11 +29,7 @@ function EdicaoProduto() {
             return;
         }
 
-        if (
-            produto.nome &&
-            Object.keys(produto.tipo).length > 0 &&
-            produto.valor
-        ) {
+        if (produto.nome && produto.tipo && produto.valor) {
             if (checkSpecialChar(produto.nome)) {
                 setMessage("Nome com caracteres especiais!");
                 setType("error");
@@ -50,7 +46,7 @@ function EdicaoProduto() {
                 let body = new URLSearchParams();
                 body.append("nome", produto.nome);
                 body.append("valor", produto.valor);
-                body.append("tipo", produto.tipo.codigo);
+                body.append("tipo", produto.tipo);
 
                 const { data } = await axios.post(
                     "http://localhost/produto/" +
@@ -82,8 +78,10 @@ function EdicaoProduto() {
         }));
     };
 
+    useEffect(() => console.log(produto), [produto]);
+
     const changeSelect = (codigo) => {
-        const tipo = tipos.find((tipo) => tipo.codigo == codigo);
+        const tipo = tipos.find((tipo) => tipo.codigo == codigo).codigo;
 
         setProduto((newProduto) => ({
             ...newProduto,
@@ -151,7 +149,7 @@ function EdicaoProduto() {
                             />
                             <Select
                                 handleChange={changeSelect}
-                                value={produto.tipo.codigo}
+                                value={produto.tipo_codigo}
                                 text="Tipo"
                                 options={tipos}
                                 placeholder="Tipo do Produto"
