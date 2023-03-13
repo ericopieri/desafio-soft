@@ -5,8 +5,9 @@ import Message from "../../layout/Message";
 
 function IncluirTipo({ postNewTipo }) {
     const [newTipo, setNewTipo] = useState({});
-    const [message, setMessage] = useState("");
+
     const [type, setType] = useState("");
+    const [message, setMessage] = useState("");
 
     const verificarPost = async () => {
         if (newTipo.nome && newTipo.percentual_imposto) {
