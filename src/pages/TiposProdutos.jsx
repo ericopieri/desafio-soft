@@ -7,6 +7,8 @@ import IncluirTipo from "../components/tiposProduto/IncluirTipo";
 function TiposProdutos() {
     const [tipos, setTipos] = useState([]);
 
+    const [showLoading, setShowLoading] = useState(false);
+
     const checkSpecialChar = (char = "") => {
         const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
@@ -38,7 +40,7 @@ function TiposProdutos() {
                 );
 
                 const { data } = await axios.post(
-                    "http://localhost/tipo?action=get",
+                    "http://localhost/tipo?action=create",
                     newTipoParams
                 );
 
@@ -51,9 +53,18 @@ function TiposProdutos() {
     };
 
     const getTipos = async () => {
-        const { data } = await axios.get("http://localhost/tipo?action=get");
+        try {
+            setShowLoading(true);
 
-        setTipos(data.data);
+            const { data } = await axios.get(
+                "http://localhost/tipo?action=get"
+            );
+
+            setTipos(data.data);
+        } catch (err) {
+        } finally {
+            setShowLoading(false);
+        }
     };
 
     useEffect(() => {
@@ -65,7 +76,7 @@ function TiposProdutos() {
             <section className="tipos-produtos">
                 <IncluirTipo postNewTipo={postNewTipo} />
                 <Divider className="vertical" />
-                <ListarTipos tipos={tipos} />
+                <ListarTipos tipos={tipos} showLoading={showLoading} />
             </section>
         </div>
     );

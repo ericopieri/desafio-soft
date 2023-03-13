@@ -5,7 +5,7 @@ import { BsFillTrashFill, BsPencilFill } from "react-icons/bs";
 import Loading from "../../layout/Loading";
 import impostoImagem from "../../img/imposto.png";
 
-function ListarTipos({ tipos }) {
+function ListarTipos({ tipos, showLoading }) {
     const [showTipos, setShowTipos] = useState(false);
 
     const tiposMap = () => {
@@ -34,7 +34,14 @@ function ListarTipos({ tipos }) {
 
     return (
         <div className="tipos">
-            {showTipos && (tipos.length > 0 ? tiposMap() : <Loading />)}
+            {showTipos &&
+                (tipos.length > 0 ? (
+                    tiposMap()
+                ) : showLoading ? (
+                    <Loading />
+                ) : (
+                    <p className="sem-tipos">Não há itens cadastrados!</p>
+                ))}
             <div className="tipos-button-div">
                 <button onClick={() => setShowTipos((showTipos) => !showTipos)}>
                     {showTipos ? <AiOutlineArrowUp /> : <AiOutlineArrowDown />}
