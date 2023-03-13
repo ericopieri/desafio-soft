@@ -565,6 +565,11 @@ tfoot tr {
     gap: 25px;
 }
 
+.sem-tipos {
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
 .tipos-button-div button {
     width: 100%;
     font-size: 1.075em;
