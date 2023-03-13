@@ -18,7 +18,7 @@ function Venda() {
 
     const atualizarImpostos = () => {
         const newTotalImpostos = itens.reduce((accum, item) => {
-            const percentual = item.produto.tipo.percentual_imposto / 100;
+            const percentual = item.produto.percentual_imposto / 100;
 
             return Number((accum + item.total * percentual).toFixed(2));
         }, 0);
