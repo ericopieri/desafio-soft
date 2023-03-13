@@ -70,8 +70,6 @@ function EdicaoTipo() {
         });
     };
 
-    useEffect(() => console.log(tipo), [tipo]);
-
     useEffect(() => {
         setIsLoading(true);
 
