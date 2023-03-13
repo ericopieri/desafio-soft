@@ -32,12 +32,13 @@ function IncluirProdutos({ products, handleIncluir, imposto }) {
             return;
         }
 
-        if (newItem.quantidade < 1) {
+        if (newItem.quantidade < 1 || newItem.quantidade > 15) {
             setNewItem((newItem) => ({
                 ...newItem,
                 quantidade: 1,
             }));
-            setMessage("Quantidade abaixo de 1 não permitida!");
+
+            setMessage("Quantidade precisa estar entre 1 e 15!");
             setType("error");
             return;
         }
