@@ -3,7 +3,10 @@ import React from "react";
 function LinhaTabela({ item, handleClickRemove }) {
     return (
         <tr>
-            <td className="left-text">
+            <td
+                className="left-text"
+                title={item.produto.codigo + " - " + item.produto.nome}
+            >
                 {item.produto.codigo} - {item.produto.nome}
             </td>
             <td>{item.quantidade}</td>

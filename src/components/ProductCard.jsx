@@ -13,7 +13,7 @@ function ProjectCard({ produto, handleRemove }) {
                     <BsPencilFill />
                 </Link>
             </div>
-            <h3>{produto.nome}</h3>
+            <h3 title={produto.nome}>{produto.nome}</h3>
             <p className="preco-produto">
                 Preço: <span>R$ {produto.valor.toFixed(2)}</span>
             </p>

@@ -1,11 +1,19 @@
 import React from "react";
 
 function Select({ options, name, handleChange, text, placeholder, value }) {
+    const truncate = (str) => {
+        return str.length > 100 ? str.substring(0, 40) + "..." : str;
+    };
+
     const optionsMap = () => {
         return options.map((option) => {
             return (
-                <option key={option.codigo} value={option.codigo}>
-                    {option.nome}
+                <option
+                    key={option.codigo}
+                    value={option.codigo}
+                    title={option.nome}
+                >
+                    {truncate(option.nome)}
                 </option>
             );
         });

@@ -207,6 +207,13 @@ a {
 
 /* Tabela */
 
+tr td,
+.product-card h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
 .tabela {
     width: 100%;
 }
